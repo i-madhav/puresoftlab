@@ -1,36 +1,36 @@
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../_assets/logo.svg";
 import navi from "../_assets/navi.svg";
 import bulb from "../_assets/bulb.svg";
+import cross from "../_assets/cross.svg";
 import userPic from "../_assets/userpic.png";
 
-const SideBar = () => {
+const SideBar = ({ setVisible}:{setVisible: React.Dispatch<React.SetStateAction<boolean>>}) => {
+  const [selected, setSelected] = useState("Reports");
+  const options = ["Reports", "Library", "People", "Activities"];
+
   return (
-    <div className="bg-white md:block hidden">
-      <div className="flex flex-col items-center justify-between h-full p-3">
-        <div className="flex flex-col w-full">
-          <div className="logo p-3">
+    <div className={`bg-white md:block h-full`}>
+      <div className="flex flex-col justify-between p-3 h-full">
+        <div className=" w-full">
+          <div className="logo p-3 flex items-center justify-between w-full">
             <Image src={Logo} alt="logo" className=" block" />
+            <Image src={cross} alt="cross" className=" block md:hidden w-8" onClick={() => setVisible(false)}/>
           </div>
 
           <div className="navigations space-y-6 w-full p-3 cursor-pointer">
-            <div className="report flex items-center px-4 py-3 bg-[#1B59F81A] rounded-lg font-mono font-medium ">
-              <Image src={navi} alt="navi" />
-              <p>Reports</p>
-            </div>
-            <div className="report flex items-center px-4 py-3 bg-[#1B59F81A] rounded-lg font-mono font-medium">
-              <Image src={navi} alt="navi" />
-              <p>Reports</p>
-            </div>
-            <div className="report flex items-center px-4 py-3 bg-[#1B59F81A] rounded-lg font-mono font-medium">
-              <Image src={navi} alt="navi" />
-              <p>Reports</p>
-            </div>
-            <div className="report flex items-center px-4 py-3 bg-[#1B59F81A] rounded-lg font-mono font-medium">
-              <Image src={navi} alt="navi" />
-              <p>Reports</p>
-            </div>
+            {options.map((item) => (
+              <div
+                className={`${
+                  selected == item ? "bg-[#1B59F81A]" : ""
+                } report flex items-center px-4 py-3  rounded-lg font-mono gap-2 font-medium`}
+                onClick={() => setSelected(item)}
+              >
+                <Image src={navi} alt="navi" />
+                <p>{item}</p>
+              </div>
+            ))}
           </div>
 
           <div className="support p-3 mt-4 w-full cursor-pointer">
@@ -54,11 +54,11 @@ const SideBar = () => {
           </div>
         </div>
         <div className="user w-full p-4 border-t border-[#E5E5E5] ">
-            <Image src={userPic} alt="userPic" className="mb-2 mt-4"/>
-            <div>
-                <p className="font-mono font-bold text-sm">Sam Wheeler</p>
-                <p className="text-[#00000080]">samwheeler@example.com</p>
-            </div>
+          <Image src={userPic} alt="userPic" className="mb-2 mt-4" />
+          <div>
+            <p className="font-mono font-bold text-sm">Sam Wheeler</p>
+            <p className="text-[#00000080]">samwheeler@example.com</p>
+          </div>
         </div>
       </div>
     </div>
