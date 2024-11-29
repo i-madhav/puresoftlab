@@ -22,6 +22,7 @@ const SideBar = ({ setVisible}:{setVisible: React.Dispatch<React.SetStateAction<
           <div className="navigations space-y-6 w-full p-3 cursor-pointer">
             {options.map((item) => (
               <div
+              key={item}
                 className={`${
                   selected == item ? "bg-[#1B59F81A]" : ""
                 } report flex items-center px-4 py-3  rounded-lg font-mono gap-2 font-medium`}
